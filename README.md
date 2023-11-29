@@ -1,4 +1,4 @@
-# cof0d44bfad1fb88293fdc9d1
+# Scrimba React Basics: Tenzies
 
 Quick start:
 
