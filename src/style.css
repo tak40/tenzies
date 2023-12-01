@@ -1,22 +1,33 @@
+/** @format */
+
+/* Reset and base styles */
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    /* outline: dotted red; */
 }
 
 body {
-    margin: 0;
-    background-color: #0B2434;
+    display: grid;
+    place-content: center;
+    height: 100vh;
     font-family: Karla, sans-serif;
+    background-color: #0b2434;
 }
 
+/* Layout and structure */
 main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    background-color: #F5F5F5;
+    justify-content: space-around;
+    gap: 1em;
     height: 400px;
-    max-width: 800px;
+    max-width: 500px;
+    padding: 1.5em;
     border-radius: 5px;
+    background-color: #f5f5f5;
 }
 
 .dice-container {
@@ -25,6 +36,7 @@ main {
     gap: 1.25em;
 }
 
+/* Components */
 .die {
     display: flex;
     align-items: center;
@@ -32,11 +44,48 @@ main {
     height: 50px;
     width: 50px;
     border-radius: 10px;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.25);
     cursor: pointer;
 }
 
+/* Typography and text elements */
+.title {
+    margin: 0;
+    font-size: 2.5rem;
+    color: #5035ff;
+}
+
+.instructions {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.25rem;
+    text-align: center;
+    color: #0b2434;
+}
+
 .die-num {
     font-size: 2rem;
+}
+
+/* Interactive elements */
+button {
+    margin-top: 0.5em;
+    padding: 0.75em 1.5em;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.25rem;
+    color: white;
+    background: #5035ff;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #5e4df7;
+    transform: scale(1.025);
+}
+
+button:active {
+    background: #4028cc;
+    transform: scale(0.975);
 }
