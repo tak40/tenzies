@@ -6,6 +6,7 @@
    - [Step 1: Setting Up index.jsx and App.jsx](#step-1-setting-up-indexjsx-and-appjsx)
    - [Step 2: Setting Up Die.jsx](#step-2-setting-up-diejsx)
    - [Key Concepts Explained](#key-concepts-explained)
+   - [Step 3: Generating Random Dice Values](#step-3-generating-random-dice-values)
 
 ## Introduction
 The Tenzies game is a fun and interactive project to learn React basics. In this game, players roll ten dice and aim to get all dice to show the same number. This README guides you through the process of setting up and developing the game using React.
@@ -111,6 +112,48 @@ After setting up the basic components of our Tenzies game, let's dive into some 
 - **Usage in Our Project**: In the Tenzies game, `App.jsx` passes the 'value' of each die to the `Die` component as a prop. This allows the `Die` component to be dynamic and display different values as needed.
 
 These concepts form the foundation of our Tenzies game and are essential for understanding how React applications are structured and function.
+
+### Step 3: Generating Random Dice Values
+
+For detailed instructions on this part of the project, refer to the Scrimba course module: [Tenzies: Generate Array of 10 Random Numbers](https://scrimba.com/learn/frontend/tenzies-generate-array-of-10-random-numbers-cod40451b92865f80528ed9e7).
+
+This step involves creating an array of random dice values, crucial for the Tenzies game. The process consists of three main parts:
+
+1. **Setting Up an Array**:
+   - Begin by initializing an empty array. This array will hold the random values for each die.
+   ```javascript
+   const newDice = [];
+   ```
+
+2. **Looping Ten Times**:
+
+Implement a loop to generate a value for each of the ten dice.  
+The loop iterates ten times, corresponding to the ten dice in the game.
+
+```javascript
+for (let i = 0; i < 10; i++) {
+    // Random number generation is done in the next step
+}
+```
+
+3. **Generating Random Numbers**:
+
+Inside the loop, generate a random number between 1 and 6 for each die.
+Use `Math.ceil(Math.random() * 6)` to ensure the number is an integer between 1 and 6.
+
+```javascript
+    function allNewDice() {
+        const newDice = []
+        for (let i = 0; i < 10; i++) {
+            newDice.push(Math.ceil(Math.random() * 6))
+        }
+        return newDice
+    }
+    console.log(allNewDice())
+```
+
+After the loop completes, `newDice` contains ten random dice values.
+The function `allNewDice` encapsulates this logic and can be called to generate a new set of dice values whenever needed in the game. Logging the result to the console helps verify that the function works correctly.
 
 ---
 
