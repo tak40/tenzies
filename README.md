@@ -5,6 +5,7 @@
 2. [Step-by-Step Guide](#step-by-step-guide)
    - [Step 1: Setting Up index.jsx and App.jsx](#step-1-setting-up-indexjsx-and-appjsx)
    - [Step 2: Setting Up Die.jsx](#step-2-setting-up-diejsx)
+   - [Key Concepts Explained](#key-concepts-explained)
 
 ## Introduction
 The Tenzies game is a fun and interactive project to learn React basics. In this game, players roll ten dice and aim to get all dice to show the same number. This README guides you through the process of setting up and developing the game using React.
@@ -61,10 +62,57 @@ For detailed instructions on setting up the `Die` component, refer to the Scrimb
   }
 
   export default Die;
-```
+  ```
 
+#### Updating App.jsx with Die Component
 
+After creating the `Die` component, we updated `App.jsx` to render multiple instances of the `Die` component. This is a crucial step in building the interactive part of the Tenzies game, where each `Die` represents a dice in the game.
 
+- **App.jsx Changes**: We added a `<div>` with the class `dice-container` to act as a container for the dice. Inside this container, we rendered ten instances of the `Die` component, each with a hardcoded value between 1 and 6 to represent the faces of a die.
+  ```jsx
+  export default function App() {
+      return (
+          <main>
+              <div className="dice-container">
+                  <Die value="1" />
+                  <Die value="2" />
+                  <Die value="3" />
+                  <Die value="4" />
+                  <Die value="5" />
+                  <Die value="6" />
+                  <Die value="1" />
+                  <Die value="1" />
+                  <Die value="1" />
+                  <Die value="1" />
+              </div>
+          </main>
+      );
+  }
+  ```
+
+### Key Concepts Explained
+
+After setting up the basic components of our Tenzies game, let's dive into some key concepts to understand the structure and functionality of our React application better.
+
+### index.jsx
+- **Role**: The entry point of the React application.
+- **Functionality**: It renders the root component, `<App />`, into the DOM. This is where our React app starts its execution.
+
+### App.jsx
+- **Role**: The central or parent component of the application.
+- **Functionality**: It acts as a container for the game's logic and other components. In our case, it holds the `Die` components and manages the game state.
+
+### Die.jsx
+- **Role**: A child component used within `App.jsx`.
+- **Functionality**: It represents an individual die and displays its value. It's a reusable component that receives its value through props from the `App` component.
+
+### Understanding Props
+- **What Are Props?**: Props (short for "properties") are how we pass data from parent to child components in React.
+- **Usage in Our Project**: In the Tenzies game, `App.jsx` passes the 'value' of each die to the `Die` component as a prop. This allows the `Die` component to be dynamic and display different values as needed.
+
+These concepts form the foundation of our Tenzies game and are essential for understanding how React applications are structured and function.
+
+---
 
 
 # React + Vite
