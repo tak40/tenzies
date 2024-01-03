@@ -14,6 +14,7 @@
     - [Step 5: Adding a Roll Dice Button](#step-5-adding-a-roll-dice-button)
     - [Step 6: Changing Dice to Objects](#step-6-changing-dice-to-objects)
     - [Step 7: Styling Held Dice](#step-7-styling-held-dice)
+    - [Step 8: Holding Dice Functionality](#step-8-holding-dice-functionality)
 
 ## Introduction
 
@@ -421,6 +422,83 @@ This step involves adding conditional styling to the `Die` components. The goal 
     ```
 
 By applying these changes, we give visual feedback to the user, making the game more intuitive and visually appealing.
+
+### Step 8: Holding Dice Functionality
+
+### Part 1 of Holding Dice Functionality
+
+For a detailed guide on the first part of implementing the dice holding functionality, visit the Scrimba module: [Tenzies: Hold Dice Part 1](https://scrimba.com/learn/frontend/tenzies-hold-dice-part-1-co29e4e94aec702f97ffb9ce4).
+
+In this part, we start building the functionality to allow players to 'hold' certain dice between rolls. The challenge is to create a function `holdDice` that logs the ID of the clicked die.
+
+1. **Creating the `holdDice` Function**:
+
+    - The `holdDice` function is designed to identify which die has been clicked.
+
+    - Initially, it simply logs the ID of the die to the console.
+
+    ```jsx
+    function holdDice(id) {
+        console.log(id)
+    }
+    ```
+
+2. **Passing `holdDice` to Die Components**:
+
+    - To link each `Die` component with the `holdDice` function, the function is passed as a prop.
+
+    - The `map` function creates each `Die` component, passing in a custom callback to `holdDice` that includes the die's unique ID.
+
+    ```jsx
+    const diceElements = dice.map(die => (
+        <Die
+            key={die.id}
+            value={die.value}
+            isHeld={die.isHeld}
+            holdDice={() => holdDice(die.id)}
+        />
+    ))
+    ```
+
+3. **Setting up the Die Component**:
+
+    - The `Die` component receives the `holdDice` prop and attaches it to the `onClick` event handler of the die's div.
+
+    - This ensures that clicking a die will execute the `holdDice` function with its specific ID.
+
+    ```jsx
+    export default function Die(props) {
+        const styles = {
+            backgroundColor: props.isHeld ? '#59E391' : 'white',
+        }
+        return (
+            <div className="die-face" style={styles} onClick={props.holdDice}>
+                <h2 className="die-num">{props.value}</h2>
+            </div>
+        )
+    }
+    ```
+
+4. **Complete App Component Structure**:
+
+    - The `App` component maintains the overall state and logic, including the `holdDice` function and the rendering of dice elements.
+
+    ```jsx
+    export default function App() {
+        // State and function definitions
+
+        return (
+            <main>
+                <div className="dice-container">{diceElements}</div>
+                <button className="roll-dice" onClick={rollDice}>
+                    Roll
+                </button>
+            </main>
+        )
+    }
+    ```
+
+In this initial part of the feature implementation, we establish the foundational connection between the dice and the function that will eventually control their 'held' state.
 
 ---
 
