@@ -13,6 +13,7 @@
     - [Step 4: Mapping Array to Die Components](#step-4-mapping-array-to-die-components)
     - [Step 5: Adding a Roll Dice Button](#step-5-adding-a-roll-dice-button)
     - [Step 6: Changing Dice to Objects](#step-6-changing-dice-to-objects)
+    - [Step 7: Styling Held Dice](#step-7-styling-held-dice)
 
 ## Introduction
 
@@ -359,7 +360,67 @@ This step transforms our array of dice values into an array of objects to enrich
 
 With the dice now represented as objects, we can manage more complex state and interactions, such as "holding" a die to keep its value between rolls.
 
----
+### Step 7: Styling Held Dice
+
+For more detailed instructions on how to style held dice, take a look at the Scrimba module: [Tenzies: Styling Held Dice](https://scrimba.com/learn/frontend/tenzies-styling-held-dice-co95f459e817fd41c6bf0f54d).
+
+This step involves adding conditional styling to the `Die` components. The goal is to visually indicate which dice have been selected, or "held," by the player.
+
+1. **Adding Conditional Styling**:
+
+    - Modify the `Die` component to apply different styles based on its `isHeld` state.
+
+    - Use a ternary operator within the `style` prop to change the background color.
+
+    ```jsx
+    export default function Die(props) {
+        const styles = {
+            backgroundColor: props.isHeld ? '#59E391' : 'white',
+        }
+        return (
+            <div className="die-face" style={styles}>
+                <h2 className="die-num">{props.value}</h2>
+            </div>
+        )
+    }
+    ```
+
+2. **Passing `isHeld` Prop to Die Component**:
+
+    - Ensure that each `Die` component receives the `isHeld` prop so it can determine its own styling.
+
+    ```jsx
+    const diceElements = dice.map(die => (
+        <Die key={die.id} value={die.value} isHeld={die.isHeld} />
+    ))
+    ```
+
+3. **Implementing the Roll Function**:
+
+    - When the "Roll" button is clicked, the `rollDice` function updates the dice state without affecting the `isHeld` property.
+
+    ```jsx
+    function rollDice() {
+        setDice(allNewDice())
+    }
+    ```
+
+4. **Rendering the Components**:
+
+    - Render the `diceElements` within the `dice-container` div and include the "Roll" button.
+
+    ```jsx
+    return (
+        <main>
+            <div className="dice-container">{diceElements}</div>
+            <button className="roll-dice" onClick={rollDice}>
+                Roll
+            </button>
+        </main>
+    )
+    ```
+
+By applying these changes, we give visual feedback to the user, making the game more intuitive and visually appealing.
 
 ---
 
