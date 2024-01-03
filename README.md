@@ -12,6 +12,7 @@
     - [Step 3: Generating Random Dice Values](#step-3-generating-random-dice-values)
     - [Step 4: Mapping Array to Die Components](#step-4-mapping-array-to-die-components)
     - [Step 5: Adding a Roll Dice Button](#step-5-adding-a-roll-dice-button)
+    - [Step 6: Changing Dice to Objects](#step-6-changing-dice-to-objects)
 
 ## Introduction
 
@@ -181,7 +182,7 @@ This step involves integrating React state into our application to manage the di
     - Introduce state to the application using the `useState` hook from React, which holds our array of dice values.
 
     ```jsx
-    const [dice, setDice] = React.useState(allNewDice());
+    const [dice, setDice] = React.useState(allNewDice())
     ```
 
 2. **Initializing State with `allNewDice` Function**:
@@ -190,11 +191,11 @@ This step involves integrating React state into our application to manage the di
 
     ```jsx
     function allNewDice() {
-        const newDice = [];
+        const newDice = []
         for (let i = 0; i < 10; i++) {
-            newDice.push(Math.ceil(Math.random() * 6));
+            newDice.push(Math.ceil(Math.random() * 6))
         }
-        return newDice;
+        return newDice
     }
     ```
 
@@ -203,7 +204,7 @@ This step involves integrating React state into our application to manage the di
     - The `map` method is used to iterate over the dice state array, creating a `Die` component for each value.
 
     ```jsx
-    const diceElements = dice.map(die => <Die value={die} />);
+    const diceElements = dice.map(die => <Die value={die} />)
     ```
 
 4. **Rendering Die Components**:
@@ -213,15 +214,12 @@ This step involves integrating React state into our application to manage the di
     ```jsx
     return (
         <main>
-            <div className="dice-container">
-                {diceElements}
-            </div>
+            <div className="dice-container">{diceElements}</div>
         </main>
-    );
+    )
     ```
 
 With these changes, the app now dynamically generates and displays dice values, demonstrating a fundamental aspect of React: managing and rendering stateful data.
-
 
 ### Step 5: Adding a Roll Dice Button
 
@@ -232,27 +230,29 @@ This step involves adding interactivity to our Tenzies game by implementing a bu
 1. **Adding a Button Element**:
 
     - A new button is added to the JSX in `App` which, when clicked, triggers a new roll of the dice.
-    
+
     ```jsx
-    <button className="roll-dice" onClick={rollDice}>Roll</button>
+    <button className="roll-dice" onClick={rollDice}>
+        Roll
+    </button>
     ```
 
 2. **Creating the `rollDice` Function**:
 
     - Define a function named `rollDice` that generates a new array of random numbers by calling `allNewDice`, then updates the `dice` state with this new array.
-    
+
     ```jsx
     function rollDice() {
-        setDice(allNewDice());
+        setDice(allNewDice())
     }
     ```
 
 3. **Updating State to Re-render the Dice**:
 
     - When the `dice` state is updated with the new array, React re-renders the `Die` components with the new values.
-    
+
     ```jsx
-    const [dice, setDice] = React.useState(allNewDice());
+    const [dice, setDice] = React.useState(allNewDice())
     ```
 
     - The `diceElements` constant is a mapped array of `Die` components that is rendered within the `dice-container` div, and now responds to the roll button click event.
@@ -260,42 +260,108 @@ This step involves adding interactivity to our Tenzies game by implementing a bu
 4. **Finalizing the Button and Functionality**:
 
     - The button is styled with the class `roll-dice` for visual consistency and is placed outside the `dice-container` but within the `<main>` element for proper layout.
-    
+
     - The complete `App` component with the roll button looks like this:
 
     ```jsx
     export default function App() {
-        const [dice, setDice] = React.useState(allNewDice());
-        
+        const [dice, setDice] = React.useState(allNewDice())
+
         function allNewDice() {
-            const newDice = [];
+            const newDice = []
             for (let i = 0; i < 10; i++) {
-                newDice.push(Math.ceil(Math.random() * 6));
+                newDice.push(Math.ceil(Math.random() * 6))
             }
-            return newDice;
+            return newDice
         }
-        
+
         function rollDice() {
-            setDice(allNewDice());
+            setDice(allNewDice())
         }
-        
-        const diceElements = dice.map(die => <Die value={die} />);
-        
+
+        const diceElements = dice.map(die => <Die value={die} />)
+
         return (
             <main>
-                <div className="dice-container">
-                    {diceElements}
-                </div>
-                <button className="roll-dice" onClick={rollDice}>Roll</button>
+                <div className="dice-container">{diceElements}</div>
+                <button className="roll-dice" onClick={rollDice}>
+                    Roll
+                </button>
             </main>
-        );
+        )
     }
     ```
 
 With the addition of the roll button, the Tenzies game is now interactive. Users can re-roll the dice, bringing the game closer to functionality.
 
+### Step 6: Changing Dice to Objects
+
+For more detail on updating the dice to objects, view the Scrimba module: [Tenzies: Change Dice to Objects](https://scrimba.com/learn/frontend/tenzies-change-dice-to-objects-cBqReJTz).
+
+This step transforms our array of dice values into an array of objects to enrich the state with more data per die.
+
+1. **Updating the State Structure**:
+
+    - The state now holds an array of objects instead of just numbers. Each object has a `value` key for the die's number, an `isHeld` key for whether the die is held, and an `id` for React's list rendering optimization.
+
+    ```jsx
+    const [dice, setDice] = React.useState(allNewDice())
+    ```
+
+    - Here's the updated `allNewDice` function:
+
+    ```jsx
+    function allNewDice() {
+        const newDice = []
+        for (let i = 0; i < 10; i++) {
+            newDice.push({
+                value: Math.ceil(Math.random() * 6),
+                isHeld: false,
+                id: nanoid(),
+            })
+        }
+        return newDice
+    }
+    ```
+
+2. **Rolling New Dice**:
+
+    - The `rollDice` function calls `allNewDice` to update the state with a new array of dice objects.
+
+    ```jsx
+    function rollDice() {
+        setDice(allNewDice())
+    }
+    ```
+
+3. **Mapping Over Object Array for Rendering**:
+
+    - When mapping over the dice array to create `Die` components, we pass additional props for `isHeld` and a `key` using the object's `id`.
+
+    ```jsx
+    const diceElements = dice.map(die => <Die key={die.id} value={die.value} />)
+    ```
+
+4. **Rendering the Component**:
+
+    - The JSX structure includes the `diceElements` within the `dice-container` and the roll button, as before.
+
+    ```jsx
+    return (
+        <main>
+            <div className="dice-container">{diceElements}</div>
+            <button className="roll-dice" onClick={rollDice}>
+                Roll
+            </button>
+        </main>
+    )
+    ```
+
+With the dice now represented as objects, we can manage more complex state and interactions, such as "holding" a die to keep its value between rolls.
+
 ---
 
+---
 
 ---
 
