@@ -15,6 +15,9 @@
     - [Step 6: Changing Dice to Objects](#step-6-changing-dice-to-objects)
     - [Step 7: Styling Held Dice](#step-7-styling-held-dice)
     - [Step 8: Holding Dice Functionality](#step-8-holding-dice-functionality)
+        - [Part 1 of Holding Dice Functionality](#part-1-of-holding-dice-functionality)
+        - [Part 2 of Holding Dice Functionality](#part-2-of-holding-dice-functionality)
+
 
 ## Introduction
 
@@ -499,6 +502,64 @@ In this part, we start building the functionality to allow players to 'hold' cer
     ```
 
 In this initial part of the feature implementation, we establish the foundational connection between the dice and the function that will eventually control their 'held' state.
+
+### Part 2 of Holding Dice Functionality
+
+Explore more about updating the hold dice functionality in this Scrimba module: [Tenzies: Hold Dice Part 2](https://scrimba.com/learn/frontend/tenzies-hold-dice-part-2-cof4842fcb65b330ef2bf07f3).
+
+In this part, we enhance the `holdDice` function to actually change the state of the dice, specifically toggling their `isHeld` property.
+
+1. **Enhancing the `holdDice` Function**:
+
+    - The `holdDice` function is updated to modify the `isHeld` property of the die that matches the passed ID.
+
+    - This is achieved using the `map` method over the current dice state, updating the `isHeld` property of the die that was clicked.
+
+    ```jsx
+    function holdDice(id) {
+        setDice(oldDice =>
+            oldDice.map(die => {
+                return die.id === id ? { ...die, isHeld: !die.isHeld } : die
+            })
+        )
+    }
+    ```
+
+2. **Mapping Over Dice State for Die Components**:
+
+    - Each `Die` component is created with a unique ID, value, and `isHeld` status.
+
+    - The `holdDice` function is passed down to each `Die` component, tied to its specific ID.
+
+    ```jsx
+    const diceElements = dice.map(die => (
+        <Die
+            key={die.id}
+            value={die.value}
+            isHeld={die.isHeld}
+            holdDice={() => holdDice(die.id)}
+        />
+    ))
+    ```
+
+3. **Rendering the Components**:
+
+    - The `App` component now includes logic to manage both rolling new dice and holding individual dice.
+
+    - The rendered UI includes the dice container and the roll button, all reacting dynamically to state changes.
+
+    ```jsx
+    return (
+        <main>
+            <div className="dice-container">{diceElements}</div>
+            <button className="roll-dice" onClick={rollDice}>
+                Roll
+            </button>
+        </main>
+    )
+    ```
+
+This update to the `holdDice` function is a significant step towards making the Tenzies game interactive. It allows players to select and hold dice between rolls, adding strategic depth to the game.
 
 ---
 
