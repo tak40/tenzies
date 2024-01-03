@@ -11,6 +11,7 @@
     - [Key Concepts Explained](#key-concepts-explained)
     - [Step 3: Generating Random Dice Values](#step-3-generating-random-dice-values)
     - [Step 4: Mapping Array to Die Components](#step-4-mapping-array-to-die-components)
+    - [Step 5: Adding a Roll Dice Button](#step-5-adding-a-roll-dice-button)
 
 ## Introduction
 
@@ -220,6 +221,81 @@ This step involves integrating React state into our application to manage the di
     ```
 
 With these changes, the app now dynamically generates and displays dice values, demonstrating a fundamental aspect of React: managing and rendering stateful data.
+
+
+### Step 5: Adding a Roll Dice Button
+
+For detailed instructions on this part of the project, refer to the Scrimba course module: [Tenzies: Roll Dice Button](https://scrimba.com/learn/frontend/tenzies-roll-dice-button-co0a84282a4902d4d2324b7fd).
+
+This step involves adding interactivity to our Tenzies game by implementing a button that enables the user to roll all ten dice.
+
+1. **Adding a Button Element**:
+
+    - A new button is added to the JSX in `App` which, when clicked, triggers a new roll of the dice.
+    
+    ```jsx
+    <button className="roll-dice" onClick={rollDice}>Roll</button>
+    ```
+
+2. **Creating the `rollDice` Function**:
+
+    - Define a function named `rollDice` that generates a new array of random numbers by calling `allNewDice`, then updates the `dice` state with this new array.
+    
+    ```jsx
+    function rollDice() {
+        setDice(allNewDice());
+    }
+    ```
+
+3. **Updating State to Re-render the Dice**:
+
+    - When the `dice` state is updated with the new array, React re-renders the `Die` components with the new values.
+    
+    ```jsx
+    const [dice, setDice] = React.useState(allNewDice());
+    ```
+
+    - The `diceElements` constant is a mapped array of `Die` components that is rendered within the `dice-container` div, and now responds to the roll button click event.
+
+4. **Finalizing the Button and Functionality**:
+
+    - The button is styled with the class `roll-dice` for visual consistency and is placed outside the `dice-container` but within the `<main>` element for proper layout.
+    
+    - The complete `App` component with the roll button looks like this:
+
+    ```jsx
+    export default function App() {
+        const [dice, setDice] = React.useState(allNewDice());
+        
+        function allNewDice() {
+            const newDice = [];
+            for (let i = 0; i < 10; i++) {
+                newDice.push(Math.ceil(Math.random() * 6));
+            }
+            return newDice;
+        }
+        
+        function rollDice() {
+            setDice(allNewDice());
+        }
+        
+        const diceElements = dice.map(die => <Die value={die} />);
+        
+        return (
+            <main>
+                <div className="dice-container">
+                    {diceElements}
+                </div>
+                <button className="roll-dice" onClick={rollDice}>Roll</button>
+            </main>
+        );
+    }
+    ```
+
+With the addition of the roll button, the Tenzies game is now interactive. Users can re-roll the dice, bringing the game closer to functionality.
+
+---
+
 
 ---
 
