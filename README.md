@@ -21,6 +21,7 @@
     - [Step 9: Implementing Game End Logic](#step-9-implementing-game-end-logic)
         - [Part 1: Implementing Game End Logic (useEffect Introduction)](#part-1-implementing-game-end-logic-useeffect-introduction)
         - [Understanding `useEffect`](#understanding-useeffect)
+        - [Part 2: Completing the Game End Logic (useEffect)](#part-2-completing-the-game-end-logic-useeffect)
 
 ## Introduction
 
@@ -701,6 +702,59 @@ This step introduces the concept of game completion (winning the game) and the u
     -   `useEffect` provides a clear separation between mutating state (which happens during rendering) and side effects, making your component logic cleaner and more predictable.
 
 This introduction of `useEffect` is the groundwork for implementing the logic to determine when the game has been won, enhancing the interactivity and complexity of the Tenzies game.
+
+### Part 2: Completing the Game End Logic (useEffect)
+
+For an in-depth look at finalizing the end game logic, check out the Scrimba module: [Tenzies: End Game Part 2](https://scrimba.com/learn/frontend/tenzies-end-game-part-2-coda448ae89bf4c2861487e00).
+
+In this part, we use the `useEffect` hook to add the logic needed to determine when the player has won the game.
+
+1. **Implementing Winning Logic in `useEffect`**:
+
+    - Within `useEffect`, we add logic to check two conditions:
+        1. All dice are held.
+        2. All dice have the same value.
+    - If both conditions are met, we conclude the player has won the game and set `tenzies` to `true`.
+
+    ```jsx
+    React.useEffect(() => {
+        const allHeld = dice.every(die => die.isHeld)
+        const firstValue = dice[0].value
+        const allSameValue = dice.every(die => die.value === firstValue)
+        if (allHeld && allSameValue) {
+            setTenzies(true)
+            console.log('You won!')
+        }
+    }, [dice])
+    ```
+
+2. **Maintaining the Dice Logic**:
+
+    - The `generateNewDie`, `allNewDice`, `rollDice`, and `holdDice` functions continue to manage the dice states and behavior.
+
+3. **Rendering the Dice and UI**:
+
+    - Each `Die` component is created with its respective properties, and the game UI is rendered with the current state of the dice.
+
+    - The rendered UI includes the game title, instructions, dice container, and the roll button.
+
+    ```jsx
+    return (
+        <main>
+            <h1 className="title">Tenzies</h1>
+            <p className="instructions">
+                Roll until all dice are the same. Click each die to freeze it at
+                its current value between rolls.
+            </p>
+            <div className="dice-container">{diceElements}</div>
+            <button className="roll-dice" onClick={rollDice}>
+                Roll
+            </button>
+        </main>
+    )
+    ```
+
+With this implementation, the Tenzies game now has a functional end condition, enhancing the gameplay experience. Players can strive to meet the winning criteria, making the game more engaging and rewarding.
 
 ---
 
