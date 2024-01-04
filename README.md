@@ -23,6 +23,7 @@
         - [Understanding `useEffect`](#understanding-useeffect)
         - [Part 2: Completing the Game End Logic (useEffect)](#part-2-completing-the-game-end-logic-useeffect)
         - [Part 3: Finalizing the Game End Logic and Adding Celebration](#part-3-finalizing-the-game-end-logic-and-adding-celebration)
+    - [Step 10: Implementing the New Game Feature](#step-10-implementing-the-new-game-feature)
 
 ## Introduction
 
@@ -812,6 +813,70 @@ This final part focuses on wrapping up the game's logic and enhancing the user e
     ```
 
 With these final additions, the Tenzies game is complete, offering a satisfying end-game experience. The implementation of `tenzies` state and confetti effect provides a visually appealing way to signify victory, making the game more engaging for players.
+
+### Step 10: Implementing the New Game Feature
+
+To understand how to add a "New Game" feature, visit the Scrimba module: [Tenzies: New Game](https://scrimba.com/learn/frontend/tenzies-new-game-co5fd4991acd2a6ded9358bb4).
+
+This step involves modifying the `rollDice` function to allow users to start a new game once they have won.
+
+1. **Enhancing the `rollDice` Function for New Game**:
+
+    - The `rollDice` function is adjusted to serve a dual purpose:
+        - If `tenzies` is `false` (game in progress), it rolls new dice, ignoring those that are held.
+        - If `tenzies` is `true` (game won), it resets the game state for a new game.
+
+    ```jsx
+    function rollDice() {
+        if (!tenzies) {
+            setDice(oldDice =>
+                oldDice.map(die => {
+                    return die.isHeld ? die : generateNewDie()
+                })
+            )
+        } else {
+            setTenzies(false)
+            setDice(allNewDice())
+        }
+    }
+    ```
+
+2. **Resetting the Game**:
+
+    - When the player has won (`tenzies` is `true`), clicking the button resets the `tenzies` state to `false` and generates a new set of dice.
+
+3. **Conditional Button Text**:
+
+    - The button text changes based on the `tenzies` state. It shows "New Game" when the game is won and "Roll" otherwise.
+
+    ```jsx
+    <button className="roll-dice" onClick={rollDice}>
+        {tenzies ? 'New Game' : 'Roll'}
+    </button>
+    ```
+
+4. **Rendering the Game UI**:
+
+    - The game continues to render the dice container, button, and instructions, with the added functionality of starting a new game.
+
+    ```jsx
+    return (
+        <main>
+            {tenzies && <Confetti />}
+            <h1 className="title">Tenzies</h1>
+            <p className="instructions">
+                Roll until all dice are the same. Click each die to freeze it at
+                its current value between rolls.
+            </p>
+            <div className="dice-container">{diceElements}</div>
+            <button className="roll-dice" onClick={rollDice}>
+                {tenzies ? 'New Game' : 'Roll'}
+            </button>
+        </main>
+    )
+    ```
+
+With this final step, the Tenzies game now includes a complete gameplay cycle, allowing players to start a new game after winning. This addition enhances the overall game experience, making it more engaging and replayable.
 
 ---
 
