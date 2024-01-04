@@ -17,7 +17,7 @@
     - [Step 8: Holding Dice Functionality](#step-8-holding-dice-functionality)
         - [Part 1 of Holding Dice Functionality](#part-1-of-holding-dice-functionality)
         - [Part 2 of Holding Dice Functionality](#part-2-of-holding-dice-functionality)
-
+        - [Part 3 of Holding Dice Functionality](#part-3-of-holding-dice-functionality)
 
 ## Introduction
 
@@ -560,6 +560,75 @@ In this part, we enhance the `holdDice` function to actually change the state of
     ```
 
 This update to the `holdDice` function is a significant step towards making the Tenzies game interactive. It allows players to select and hold dice between rolls, adding strategic depth to the game.
+
+### Part 3 of Holding Dice Functionality
+
+For further details on the final part of implementing the dice holding functionality, refer to the Scrimba module: [Tenzies: Hold Dice Part 3](https://scrimba.com/learn/frontend/tenzies-hold-dice-part-3-co14645439b478cc8343d4ffe).
+
+In this part, we refine the `rollDice` function to account for dice that are being held and should not be rerolled.
+
+1. **Refining the `rollDice` Function**:
+
+    - The `rollDice` function is updated to reroll only the dice that are not held.
+
+    - We map over the existing dice, and for each one, we check if it's held. If not, we generate a new die.
+
+    ```jsx
+    function rollDice() {
+        setDice(oldDice =>
+            oldDice.map(die => {
+                return die.isHeld ? die : generateNewDie()
+            })
+        )
+    }
+    ```
+
+2. **Generating a New Die**:
+
+    - We introduce a new function `generateNewDie` to create a single new die, maintaining the structure of our dice objects.
+
+    ```jsx
+    function generateNewDie() {
+        return {
+            value: Math.ceil(Math.random() * 6),
+            isHeld: false,
+            id: nanoid(),
+        }
+    }
+    ```
+
+3. **Updating the `allNewDice` Function**:
+
+    - `allNewDice` now uses `generateNewDie` to create each new die, ensuring consistency in how dice are created.
+
+    ```jsx
+    function allNewDice() {
+        const newDice = []
+        for (let i = 0; i < 10; i++) {
+            newDice.push(generateNewDie())
+        }
+        return newDice
+    }
+    ```
+
+4. **Rendering Die Components and Roll Button**:
+
+    - Each `Die` component is rendered with its value, held status, and a function to toggle its hold state.
+
+    - The 'Roll' button is provided to trigger a new roll of the dice that are not held.
+
+    ```jsx
+    return (
+        <main>
+            <div className="dice-container">{diceElements}</div>
+            <button className="roll-dice" onClick={rollDice}>
+                Roll
+            </button>
+        </main>
+    )
+    ```
+
+With the completion of Part 3, the dice rolling and holding functionality in the Tenzies game is fully functional. Players can now choose to 'hold' certain dice while rerolling the others, adding an important aspect of gameplay strategy.
 
 ---
 
