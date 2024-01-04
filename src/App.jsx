@@ -1,6 +1,7 @@
 /** @format */
 import { useState, useEffect } from 'react'
 import { nanoid } from 'nanoid'
+import Confetti from 'react-confetti'
 import Die from '/components/Die.jsx'
 
 function App() {
@@ -15,15 +16,6 @@ function App() {
             console.log('You won!')
         }
     }, [dice])
-
-    /**
-     * Challenge: Check the dice array for these winning conditions:
-     * 1. All dice are held, and
-     * 2. all dice have the same value
-     *
-     * If both conditions are true, set `tenzies` to true and log
-     * "You won!" to the console
-     */
 
     function allNewDice() {
         const newDice = []
@@ -72,13 +64,16 @@ function App() {
 
     return (
         <main>
+            {tenzies && <Confetti />}
             <h1 className="title">Tenzies</h1>
             <p className="instructions">
                 Roll until all dice are the same. Click each die to freeze it at
                 its current value between rolls.
             </p>
             <div className="dice-container">{diceElements}</div>
-            <button onClick={rollNewDice}>Roll</button>
+            <button onClick={rollNewDice}>
+                {tenzies ? 'New Game' : 'Roll'}
+            </button>
         </main>
     )
 }

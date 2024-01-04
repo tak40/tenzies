@@ -22,6 +22,7 @@
         - [Part 1: Implementing Game End Logic (useEffect Introduction)](#part-1-implementing-game-end-logic-useeffect-introduction)
         - [Understanding `useEffect`](#understanding-useeffect)
         - [Part 2: Completing the Game End Logic (useEffect)](#part-2-completing-the-game-end-logic-useeffect)
+        - [Part 3: Finalizing the Game End Logic and Adding Celebration](#part-3-finalizing-the-game-end-logic-and-adding-celebration)
 
 ## Introduction
 
@@ -755,6 +756,62 @@ In this part, we use the `useEffect` hook to add the logic needed to determine w
     ```
 
 With this implementation, the Tenzies game now has a functional end condition, enhancing the gameplay experience. Players can strive to meet the winning criteria, making the game more engaging and rewarding.
+
+### Part 3: Finalizing the Game End Logic and Adding Celebration
+
+For completing the game end logic and adding a celebratory effect, check out the Scrimba module: [Tenzies: End Game Part 3](https://scrimba.com/learn/frontend/tenzies-end-game-part-3-co80c434696f1de23fe3a276f).
+
+This final part focuses on wrapping up the game's logic and enhancing the user experience with visual feedback upon winning the game.
+
+1. **Implementing Game Completion Features**:
+
+    - The button text changes based on the game's state. When `tenzies` is `true` (the game is won), the button text changes to "New Game".
+
+    - The `react-confetti` package is used to add a celebratory confetti effect when the player wins.
+
+    ```jsx
+    {
+        tenzies && <Confetti />
+    }
+    ;<button className="roll-dice" onClick={rollDice}>
+        {tenzies ? 'New Game' : 'Roll'}
+    </button>
+    ```
+
+2. **Use of `useEffect` for Game Logic**:
+
+    - The `useEffect` hook continues to monitor the dice state for winning conditions.
+
+    - When all dice are held and have the same value, `setTenzies` is called to indicate the game has been won.
+
+3. **Dice State Management**:
+
+    - The `rollDice` and `holdDice` functions handle the game's core logic of rolling and holding dice.
+
+4. **Rendering Dice and Game UI**:
+
+    - The game UI dynamically renders the dice and updates the button text based on the game's state.
+
+    - The confetti effect is conditionally rendered, enhancing the sense of achievement upon winning the game.
+
+    ```jsx
+    return (
+        <main>
+            {tenzies && <Confetti />}
+            <h1 className="title">Tenzies</h1>
+            <p className="instructions">
+                Roll until all dice are the same. Click each die to freeze it at
+                its current value between rolls.
+            </p>
+            <div className="dice-container">{diceElements}</div>
+            <button className="roll-dice" onClick={rollDice}>
+                {tenzies ? 'New Game' : 'Roll'}
+            </button>
+        </main>
+    )
+    ```
+
+With these final additions, the Tenzies game is complete, offering a satisfying end-game experience. The implementation of `tenzies` state and confetti effect provides a visually appealing way to signify victory, making the game more engaging for players.
 
 ---
 
