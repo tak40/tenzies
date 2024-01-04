@@ -1,10 +1,26 @@
 /** @format */
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { nanoid } from 'nanoid'
 import Die from '/components/Die.jsx'
 
 function App() {
     const [dice, setDice] = useState(allNewDice())
+    const [tenzies, setTenzies] = useState(false)
+
+    useEffect(() => { 
+        console.log("Dice state changed")
+    }, [dice])
+
+    
+    /**
+     * Challenge:
+     * 1. Add new state called `tenzies`, default to false. It
+     *    represents whether the user has won the game yet or not.
+     * 2. Add an effect that runs every time the `dice` state array
+     *    changes. For now, just console.log("Dice state changed").
+     */
+    
+
 
     function allNewDice() {
         const newDice = []

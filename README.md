@@ -18,6 +18,9 @@
         - [Part 1 of Holding Dice Functionality](#part-1-of-holding-dice-functionality)
         - [Part 2 of Holding Dice Functionality](#part-2-of-holding-dice-functionality)
         - [Part 3 of Holding Dice Functionality](#part-3-of-holding-dice-functionality)
+    - [Step 9: Implementing Game End Logic](#step-9-implementing-game-end-logic)
+        - [Part 1: Implementing Game End Logic (useEffect Introduction)](#part-1-implementing-game-end-logic-useeffect-introduction)
+        - [Understanding `useEffect`](#understanding-useeffect)
 
 ## Introduction
 
@@ -629,6 +632,75 @@ In this part, we refine the `rollDice` function to account for dice that are bei
     ```
 
 With the completion of Part 3, the dice rolling and holding functionality in the Tenzies game is fully functional. Players can now choose to 'hold' certain dice while rerolling the others, adding an important aspect of gameplay strategy.
+
+### Step 9: Implementing Game End Logic
+
+### Part 1: Implementing Game End Logic (useEffect Introduction)
+
+Learn more about beginning the end game logic in this Scrimba module: [Tenzies: End Game Part 1](https://scrimba.com/learn/frontend/tenzies-end-game-part-1-co86d4dd2862c6bda5b935d4f).
+
+This step introduces the concept of game completion (winning the game) and the use of the `useEffect` hook to react to state changes.
+
+1. **Introducing New State `tenzies`**:
+
+    - A new piece of state, `tenzies`, is added to track whether the player has won the game. It's initially set to `false`.
+
+    ```jsx
+    const [tenzies, setTenzies] = React.useState(false)
+    ```
+
+2. **Using the `useEffect` Hook**:
+
+    - `useEffect` is utilized to perform side effects in the component, such as reacting to state changes.
+
+    - In this case, `useEffect` runs every time the `dice` state changes, logging a message to the console. This is a setup for future logic to check for game completion.
+
+    ```jsx
+    React.useEffect(() => {
+        console.log('Dice state changed')
+    }, [dice])
+    ```
+
+3. **Remaining Component Logic**:
+
+    - The rest of the component remains focused on managing the dice states and rendering the game UI.
+
+    - The `rollDice` and `holdDice` functions control the dice behavior, and the `diceElements` array creates the visual representation of each die.
+
+4. **Rendering the Game UI**:
+
+    - The game UI includes a title, instructions, the dice container, and the roll button.
+
+    ```jsx
+    return (
+        <main>
+            <h1 className="title">Tenzies</h1>
+            <p className="instructions">
+                Roll until all dice are the same. Click each die to freeze it at
+                its current value between rolls.
+            </p>
+            <div className="dice-container">{diceElements}</div>
+            <button className="roll-dice" onClick={rollDice}>
+                Roll
+            </button>
+        </main>
+    )
+    ```
+
+### Understanding `useEffect`
+
+-   **What Is `useEffect`?**
+
+    -   `useEffect` is a React hook that allows you to perform side effects in your components. Side effects are operations that can affect other components or can't be done during rendering, like fetching data, directly interacting with the DOM, or subscribing to some external input.
+
+-   **Reacting to State Changes**:
+
+    -   One common use of `useEffect` is to respond to changes in the component's state or props. You specify which values `useEffect` should watch, and it runs whenever those values change.
+
+-   **Why Use `useEffect`?**
+    -   `useEffect` provides a clear separation between mutating state (which happens during rendering) and side effects, making your component logic cleaner and more predictable.
+
+This introduction of `useEffect` is the groundwork for implementing the logic to determine when the game has been won, enhancing the interactivity and complexity of the Tenzies game.
 
 ---
 
