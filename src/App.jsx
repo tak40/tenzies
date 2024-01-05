@@ -1,5 +1,6 @@
 /** @format */
 import { useState, useEffect } from 'react'
+import { useTheme } from './ThemeContext'
 import { nanoid } from 'nanoid'
 import Confetti from 'react-confetti'
 import Die from '/components/Die.jsx'
@@ -7,6 +8,7 @@ import Die from '/components/Die.jsx'
 function App() {
     const [dice, setDice] = useState(allNewDice())
     const [tenzies, setTenzies] = useState(false)
+    const { theme, toggleTheme } = useTheme()
 
     useEffect(() => {
         const allHeld = dice.every(die => die.isHeld)
@@ -46,9 +48,9 @@ function App() {
                     return die.isHeld
                         ? die
                         : {
-                            ...die,
-                            value: Math.ceil(Math.random() * 6),
-                        }
+                              ...die,
+                              value: Math.ceil(Math.random() * 6),
+                          }
                 })
             )
         } else {
@@ -66,8 +68,18 @@ function App() {
         />
     ))
 
+    const handleThemeToggle = () => {
+        toggleTheme(
+            theme === 'classic'
+                ? 'neon'
+                : theme === 'neon'
+                ? 'retro'
+                : 'classic'
+        )
+    }
+
     return (
-        <main>
+        <main className={`theme-${theme}`}>
             {tenzies && <Confetti />}
             <h1 className="title">Tenzies</h1>
             <p className="instructions">
@@ -78,6 +90,7 @@ function App() {
             <button onClick={rollNewDice}>
                 {tenzies ? 'New Game' : 'Roll'}
             </button>
+            <button onClick={handleThemeToggle}>Toggle Theme</button>
         </main>
     )
 }
