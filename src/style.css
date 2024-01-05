@@ -89,3 +89,22 @@ button:active {
     background: #4028cc;
     transform: scale(0.975);
 }
+
+.title {
+  transition: color 0.3s ease;
+}
+
+/* Classic theme */
+.theme-classic .title {
+  color: #555; 
+}
+
+/* Neon theme */
+.theme-neon .title {
+  color: #0f0; 
+}
+
+/* Retro theme */
+.theme-retro .title {
+  color: #f90; 
+}
