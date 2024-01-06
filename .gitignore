@@ -1,0 +1,10 @@
+# Dependencies
+/node_modules
+_metadata.json
+
+# Vite
+.vite/
+dist/
+
+# Build
+build/

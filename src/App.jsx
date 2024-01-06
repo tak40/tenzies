@@ -82,6 +82,7 @@ function App() {
         <main className={`theme-${theme}`}>
             {tenzies && <Confetti />}
             <h1 className="title">Tenzies</h1>
+            <button onClick={handleThemeToggle}>Toggle Theme</button>
             <p className="instructions">
                 Roll until all dice are the same. Click each die to freeze it at
                 its current value between rolls.
@@ -90,7 +91,6 @@ function App() {
             <button onClick={rollNewDice}>
                 {tenzies ? 'New Game' : 'Roll'}
             </button>
-            <button onClick={handleThemeToggle}>Toggle Theme</button>
         </main>
     )
 }
