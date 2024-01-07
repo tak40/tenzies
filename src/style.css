@@ -157,19 +157,15 @@ button {
     border-radius: 5px;
     font-size: 1.25rem;
     color: white;
-    /* background: #5035ff; */
-    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.25);
-    transition: all 0.3s ease-in-out;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
 }
 
 button:hover {
-    /* background: #5e4df7; */
     transform: scale(1.025);
 }
 
 button:active {
-    /* background: #4028cc; */
     transform: scale(0.975);
 }
 
@@ -234,30 +230,74 @@ button:active {
 }
 
 .theme-classic .die.held {
+    transform: scale(1.1);
     background-color: #c7c2bd; 
     box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.3); 
     background-image: url('/classic-dice-held.jpg');
 }
 
-/* NEON */
+/* ----- NEON ----- */
+
 .theme-neon {
     background-image: url('/neon-background.jpg');
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    background-repeat: no-repeat; 
+    animation: neonBgAnimation 5s infinite alternate;
+}
+
+@keyframes neonBgAnimation {
+    0% { filter: brightness(1); }
+    100% { filter: brightness(1.25); }
 }
 
 .theme-neon .title,
 .theme-neon .instructions {
     font-family: 'Orbitron', sans-serif;
     color: var(--title-color-neon);
+    text-shadow: 0 0 10px var(--title-color-neon), 0 0 20px var(--title-color-neon);
+}
+
+.theme-neon .die {
+    background-color: rgba(255, 255, 255, 0.75);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.75), 0 0 20px rgba(255, 255, 255, 0.75);
+}
+
+.theme-neon .dot {
+    background-color: #ff00ff; 
+    box-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff; 
+    border: 2px solid #ffffff; 
 }
 
 .theme-neon button {
     font-family: 'Orbitron', sans-serif;
-    background-color: rgba(0, 191, 255, 0.5);
-    color: #ffffff;
+    background-color: rgba(0, 255, 0, 0.6); 
+    color: #000; 
+    text-shadow: 0 0 8px #000; 
+    box-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.theme-neon button:hover {
+    background-color: rgba(0, 255, 0, 0.7); 
+    box-shadow: 0 0 15px #00ff00, 0 0 30px #00ff00; 
+}
+
+.theme-neon button:active {
+    background-color: rgba(0, 220, 0, 0.5); 
+    box-shadow: 0 0 10px #00cc00, 0 0 20px #00cc00; 
+}
+
+.theme-neon .die.held {
+    transform: scale(1.1); 
+    background-color: rgba(255, 0, 255, 0.75); 
+    box-shadow: 0 0 10px rgba(255, 0, 255, 0.75), 0 0 20px rgba(255, 0, 255, 0.75), 0 0 30px rgba(255, 0, 255, 0.75); /* Strong glow effect */
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.theme-neon .die.held .dot {
+    background-color: #ff00ff; 
+    box-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff; 
 }
 
 /* RETRO */
