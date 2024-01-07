@@ -3,7 +3,7 @@
 :root {
     --title-color-classic: #f4e9e2;
     --title-color-neon: #0f0;
-    --title-color-retro: #00ffff;
+    --title-color-retro: #ffcc00;
 }
 /* Reset and base styles */
 * {
@@ -157,7 +157,8 @@ button {
     border-radius: 5px;
     font-size: 1.25rem;
     color: white;
-    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease,
+        box-shadow 0.3s ease;
     cursor: pointer;
 }
 
@@ -181,7 +182,7 @@ button:active {
 
 .theme-classic .title {
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
-    color: #3d2c29; 
+    color: #3d2c29;
 }
 
 .theme-classic .title,
@@ -203,20 +204,20 @@ button:active {
     border-radius: 5px;
     font-size: 1.25rem;
     background: rgba(216, 202, 168, 0.5);
-    color: #3d2c29; 
+    color: #3d2c29;
     box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.25);
     transition: all 0.3s ease-in-out;
     cursor: pointer;
 }
 
 .theme-classic button:hover {
-    background: rgba(255, 255, 255, 0.3); 
-    border-color: #d4c3b2; 
+    background: rgba(255, 255, 255, 0.3);
+    border-color: #d4c3b2;
 }
 
 .theme-classic button:active {
-    background: rgba(255, 255, 255, 0.1); 
-    border-color: #a48267; 
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #a48267;
 }
 
 .theme-classic .dot {
@@ -226,13 +227,13 @@ button:active {
 .theme-classic .die {
     background-color: #f0e5d8;
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1), 0 5px 5px rgba(0, 0, 0, 0.25);
-    background-image: url('/classic-dice.jpg'); 
+    background-image: url('/classic-dice.jpg');
 }
 
 .theme-classic .die.held {
     transform: scale(1.1);
-    background-color: #c7c2bd; 
-    box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.3); 
+    background-color: #c7c2bd;
+    box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.3);
     background-image: url('/classic-dice-held.jpg');
 }
 
@@ -242,62 +243,70 @@ button:active {
     background-image: url('/neon-background.jpg');
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat; 
+    background-repeat: no-repeat;
     animation: neonBgAnimation 5s infinite alternate;
 }
 
 @keyframes neonBgAnimation {
-    0% { filter: brightness(1); }
-    100% { filter: brightness(1.25); }
+    0% {
+        filter: brightness(1);
+    }
+    100% {
+        filter: brightness(1.25);
+    }
 }
 
 .theme-neon .title,
 .theme-neon .instructions {
     font-family: 'Orbitron', sans-serif;
     color: var(--title-color-neon);
-    text-shadow: 0 0 10px var(--title-color-neon), 0 0 20px var(--title-color-neon);
+    text-shadow: 0 0 10px var(--title-color-neon),
+        0 0 20px var(--title-color-neon);
 }
 
 .theme-neon .die {
     background-color: rgba(255, 255, 255, 0.75);
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.75), 0 0 20px rgba(255, 255, 255, 0.75);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.75),
+        0 0 20px rgba(255, 255, 255, 0.75);
 }
 
 .theme-neon .dot {
-    background-color: #ff00ff; 
-    box-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff; 
-    border: 2px solid #ffffff; 
+    background-color: #ff00ff;
+    box-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+    border: 2px solid #ffffff;
 }
 
 .theme-neon button {
     font-family: 'Orbitron', sans-serif;
-    background-color: rgba(0, 255, 0, 0.6); 
-    color: #000; 
-    text-shadow: 0 0 8px #000; 
+    background-color: rgba(0, 255, 0, 0.6);
+    color: #000;
+    text-shadow: 0 0 8px #000;
     box-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .theme-neon button:hover {
-    background-color: rgba(0, 255, 0, 0.7); 
-    box-shadow: 0 0 15px #00ff00, 0 0 30px #00ff00; 
+    background-color: rgba(0, 255, 0, 0.7);
+    box-shadow: 0 0 15px #00ff00, 0 0 30px #00ff00;
 }
 
 .theme-neon button:active {
-    background-color: rgba(0, 220, 0, 0.5); 
-    box-shadow: 0 0 10px #00cc00, 0 0 20px #00cc00; 
+    background-color: rgba(0, 220, 0, 0.5);
+    box-shadow: 0 0 10px #00cc00, 0 0 20px #00cc00;
 }
 
 .theme-neon .die.held {
-    transform: scale(1.1); 
-    background-color: rgba(255, 0, 255, 0.75); 
-    box-shadow: 0 0 10px rgba(255, 0, 255, 0.75), 0 0 20px rgba(255, 0, 255, 0.75), 0 0 30px rgba(255, 0, 255, 0.75); /* Strong glow effect */
-    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    transform: scale(1.1);
+    background-color: rgba(255, 0, 255, 0.75);
+    box-shadow: 0 0 10px rgba(255, 0, 255, 0.75),
+        0 0 20px rgba(255, 0, 255, 0.75), 0 0 30px rgba(255, 0, 255, 0.75); 
+    transition: transform 0.3s ease, background-color 0.3s ease,
+        box-shadow 0.3s ease;
 }
 
 .theme-neon .die.held .dot {
-    background-color: #ff00ff; 
-    box-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff; 
+    background-color: #ff00ff;
+    box-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff;
 }
 
 /* RETRO */
@@ -307,13 +316,13 @@ button:active {
     background-position: center;
     background-repeat: no-repeat;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-family: 'Press Start 2P', cursive;
 }
 
 .theme-retro .title,
 .theme-retro .instructions {
-    font-family: 'Press Start 2P', cursive;
     color: var(--title-color-retro);
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 0 5px #ffcc00, 0 0 10px #ffcc00;
 }
 
 .theme-retro .title {
@@ -321,13 +330,41 @@ button:active {
 }
 
 .theme-retro .instructions {
-    font-size: 0.8rem;
+    color: #ffd634;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px;
+    text-shadow: 0 0 10px #000, 0 0 15px #000;
+    font-weight: bold;
+}
+
+.theme-retro .die {
+    border: 3px dotted #00ff00;
+    background-color: #000;
+}
+
+.theme-retro .dot {
+    background-color: #ffcc00; 
+    box-shadow: 0 0 5px #ffcc00, 0 0 10px #ffcc00; 
 }
 
 .theme-retro button {
     font-family: 'Press Start 2P', cursive;
-    background-color: rgba(255, 255, 255, 0.5);
-    color: #000000;
-    font-size: 0.8rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    background-color: #00ff00; 
+    border: 2px solid #ffcc00; 
+    box-shadow: 0 0 5px #ffcc00, 0 0 10px #ffcc00; 
+    color: #000;
+    text-shadow: 0 0 5px #ffcc00, 0 0 10px #ffcc00; 
+}
+
+.theme-retro button:hover {
+    background-color: #ffcc00; 
+    color: #000;
+    border-color: #00ff00; 
+    box-shadow: 0 0 10px #00ff00, 0 0 15px #00ff00; 
+}
+
+.theme-retro .die.held {
+    transform: scale(1.1); 
+    border-color: #ff0000; 
+    box-shadow: 0 0 10px #ff0000, 0 0 15px #ff0000; 
 }
