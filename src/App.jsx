@@ -2,9 +2,11 @@
 import { useState, useEffect } from 'react'
 import { useTheme } from './ThemeContext'
 import { useSound } from './SoundManager'
+import { useSoundContext } from './SoundContext'
 import { nanoid } from 'nanoid'
 import Confetti from 'react-confetti'
 import Die from '/components/Die.jsx'
+import SoundToggle from '../components/SoundToggle'
 
 function App() {
     const [dice, setDice] = useState(allNewDice())
@@ -86,6 +88,7 @@ function App() {
         <main className={`theme-${theme}`}>
             {tenzies && <Confetti />}
             <h1 className="title">Tenzies</h1>
+            <SoundToggle />
             <button onClick={handleThemeToggle}>Toggle Theme</button>
             <p className="instructions">
                 Roll until all dice are the same. Click each die to freeze it at
