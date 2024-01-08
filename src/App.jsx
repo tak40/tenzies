@@ -1,6 +1,7 @@
 /** @format */
 import { useState, useEffect } from 'react'
 import { useTheme } from './ThemeContext'
+import { useSound } from './SoundManager'
 import { nanoid } from 'nanoid'
 import Confetti from 'react-confetti'
 import Die from '/components/Die.jsx'
@@ -9,6 +10,7 @@ function App() {
     const [dice, setDice] = useState(allNewDice())
     const [tenzies, setTenzies] = useState(false)
     const { theme, toggleTheme } = useTheme()
+    const { playSound } = useSound()
 
     useEffect(() => {
         const allHeld = dice.every(die => die.isHeld)
@@ -53,6 +55,7 @@ function App() {
                           }
                 })
             )
+            playSound('roll')
         } else {
             setDice(allNewDice())
             setTenzies(false)
