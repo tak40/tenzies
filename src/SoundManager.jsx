@@ -1,4 +1,5 @@
 import { useTheme } from './ThemeContext'
+import { useSoundContext } from './SoundContext'
 
 const sounds = {
     classic: {
@@ -17,9 +18,12 @@ const sounds = {
 
 export const useSound = () => {
     const { theme } = useTheme()
+    const { soundEnabled } = useSoundContext()
 
     const playSound = sound => {
-        sounds[theme][sound].play()
+        if (soundEnabled) {
+            sounds[theme][sound].play()
+        }
     }
 
     return { playSound }
