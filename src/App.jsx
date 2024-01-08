@@ -36,6 +36,7 @@ function App() {
         setDice(prevDice =>
             prevDice.map(die => {
                 if (die.id === id) {
+                    playSound('hold') 
                     return { ...die, isHeld: !die.isHeld }
                 }
                 return die
