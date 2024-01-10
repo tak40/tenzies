@@ -7,6 +7,9 @@ import { nanoid } from 'nanoid'
 import Confetti from 'react-confetti'
 import Die from '/components/Die.jsx'
 import SoundToggle from '../components/SoundToggle'
+import ClassicEndGame from './EndGameEffects/ClassicEndGame'
+import NeonEndGame from './EndGameEffects/NeonEndGame'
+import RetroEndGame from './EndGameEffects/RetroEndGame'
 
 function App() {
     const [dice, setDice] = useState(allNewDice())
@@ -84,9 +87,27 @@ function App() {
         )
     }
 
+
+    let EndGameComponent
+
+    switch (theme) {
+        case 'classic':
+            EndGameComponent = ClassicEndGame
+            break
+        case 'neon':
+            EndGameComponent = NeonEndGame
+            break
+        case 'retro':
+            EndGameComponent = RetroEndGame
+            break
+        default:
+            EndGameComponent = null
+    }
+
+
     return (
         <main className={`theme-${theme}`}>
-            {tenzies && <Confetti />}
+            {tenzies && EndGameComponent && <EndGameComponent />}
             <h1 className="title">Tenzies</h1>
             <SoundToggle />
             <button onClick={handleThemeToggle}>Toggle Theme</button>

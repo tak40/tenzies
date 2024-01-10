@@ -2,8 +2,8 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { ThemeProvider } from './ThemeContext' // Import ThemeProvider
-import { SoundProvider } from './SoundContext' // Import SoundProvider  
+import { ThemeProvider } from './ThemeContext' 
+import { SoundProvider } from './SoundContext' 
 import App from './App.jsx'
 import './style.css'
 
