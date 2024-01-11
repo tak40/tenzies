@@ -11,12 +11,44 @@ import ClassicEndGame from './EndGameEffects/ClassicEndGame'
 import NeonEndGame from './EndGameEffects/NeonEndGame'
 import RetroEndGame from './EndGameEffects/RetroEndGame'
 
+
 function App() {
     const [dice, setDice] = useState(allNewDice())
     const [tenzies, setTenzies] = useState(false)
     const { theme, toggleTheme } = useTheme()
     const { playSound } = useSound()
 
+    // New timer state
+    const [timer, setTimer] = useState(0)
+    const [timerRunning, setTimerRunning] = useState(false)
+
+    // Start the timer when the first roll happens and stop when the game ends
+    useEffect(() => {
+        if (tenzies) {
+            setTimerRunning(false)
+        }
+    }, [tenzies])
+
+    useEffect(() => {
+        let interval
+        if (timerRunning) {
+            interval = setInterval(() => {
+                setTimer(prevTimer => prevTimer + 10)
+            }, 10)
+        }
+        return () => clearInterval(interval)
+    }, [timerRunning])
+
+    // Format the time for display
+    const formatTime = () => {
+        const milliseconds = Math.floor((timer % 1000) / 10) 
+        const seconds = Math.floor(timer / 1000)
+
+        const formattedSeconds = seconds.toString().padStart(2, '0')
+        const formattedMilliseconds = milliseconds.toString().padStart(2, '0')
+
+        return `${formattedSeconds}:${formattedMilliseconds}`
+    }
     useEffect(() => {
         const allHeld = dice.every(die => die.isHeld)
         const allSame = dice.every(die => die.value === dice[0].value)
@@ -41,7 +73,7 @@ function App() {
         setDice(prevDice =>
             prevDice.map(die => {
                 if (die.id === id) {
-                    playSound('hold') 
+                    playSound('hold')
                     return { ...die, isHeld: !die.isHeld }
                 }
                 return die
@@ -51,6 +83,9 @@ function App() {
 
     function rollNewDice() {
         if (!tenzies) {
+            if (!timerRunning) {
+                setTimerRunning(true)
+            }
             setDice(prevDice =>
                 prevDice.map(die => {
                     return die.isHeld
@@ -65,6 +100,8 @@ function App() {
         } else {
             setDice(allNewDice())
             setTenzies(false)
+            setTimer(0) // Reset timer for new game
+            setTimerRunning(false)
         }
     }
 
@@ -87,7 +124,6 @@ function App() {
         )
     }
 
-
     let EndGameComponent
 
     switch (theme) {
@@ -104,11 +140,11 @@ function App() {
             EndGameComponent = null
     }
 
-
     return (
         <main className={`theme-${theme}`}>
             {tenzies && EndGameComponent && <EndGameComponent />}
             <h1 className="title">Tenzies</h1>
+            <div>Time: {formatTime()}</div>
             <SoundToggle />
             <button onClick={handleThemeToggle}>Toggle Theme</button>
             <p className="instructions">
