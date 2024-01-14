@@ -11,7 +11,6 @@ import ClassicEndGame from './EndGameEffects/ClassicEndGame'
 import NeonEndGame from './EndGameEffects/NeonEndGame'
 import RetroEndGame from './EndGameEffects/RetroEndGame'
 
-
 function App() {
     const [dice, setDice] = useState(allNewDice())
     const [tenzies, setTenzies] = useState(false)
@@ -41,7 +40,7 @@ function App() {
 
     // Format the time for display
     const formatTime = () => {
-        const milliseconds = Math.floor((timer % 1000) / 10) 
+        const milliseconds = Math.floor((timer % 1000) / 10)
         const seconds = Math.floor(timer / 1000)
 
         const formattedSeconds = seconds.toString().padStart(2, '0')
@@ -144,9 +143,23 @@ function App() {
         <main className={`theme-${theme}`}>
             {tenzies && EndGameComponent && <EndGameComponent />}
             <h1 className="title">Tenzies</h1>
-            <div>Time: {formatTime()}</div>
-            <SoundToggle />
-            <button onClick={handleThemeToggle}>Toggle Theme</button>
+            <div className="control-panel">
+                <div className="control-panel-item timer">
+                    ⏲️
+                    <span>{formatTime()}</span>
+                </div>
+                <div className='control-panel-btns'>
+                    <SoundToggle />
+                    <div>
+                        <button
+                            className="control-panel-icon theme-toggle"
+                            onClick={handleThemeToggle}
+                        >
+                            🎨
+                        </button>
+                    </div>
+                </div>
+            </div>
             <p className="instructions">
                 Roll until all dice are the same. Click each die to freeze it at
                 its current value between rolls.
