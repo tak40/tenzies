@@ -5,6 +5,7 @@
     --title-color-neon: #0f0;
     --title-color-retro: #ffcc00;
 }
+
 /* Reset and base styles */
 * {
     box-sizing: border-box;
@@ -24,13 +25,14 @@ body {
 
 /* Layout and structure */
 main {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
     gap: 1em;
-    height: 560px;
-    max-width: 700px;
+    height: 520px;
+    max-width: 650px;
     padding: 1.5em;
     border-radius: 5px;
     background-color: #f5f5f5;
@@ -40,6 +42,46 @@ main {
     display: grid;
     grid-template: repeat(2, 1fr) / repeat(5, 1fr);
     gap: 1.25em;
+}
+
+/* Control Panel Styles */
+.control-panel {
+    position: absolute;
+    top: 12px; 
+    right: 12px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* gap: 8px; */
+    background: rgba(0, 0, 0, 0.6); 
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+
+.control-panel-item {
+    background: none; /* Remove the background to match the theme */
+    padding: 2px 6px; /* Adjust padding for a less bulky appearance */
+    border: none; /* Remove borders */
+}
+
+.control-panel-btns {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 0.5em;
+    width: 100%;
+}
+
+.control-panel-icon {
+    color: var(--title-color-classic); /* Use the color variable for consistency */
+}
+
+.timer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    color: var(--title-color-classic);
 }
 
 /* Components */
@@ -130,7 +172,7 @@ main {
     justify-content: center;
     margin: 0 auto;
     width: 250px;
-    height: 50px;
+    height: 40px;
     font-weight: 700;
     font-size: 2.5rem;
     color: #5035ff;
@@ -218,6 +260,11 @@ button:active {
 .theme-classic button:active {
     background: rgba(255, 255, 255, 0.1);
     border-color: #a48267;
+}
+
+.theme-classic .theme-toggle,
+.theme-classic .sound-btn {
+    padding: 0.25em;
 }
 
 .theme-classic .dot {
@@ -330,6 +377,11 @@ button:active {
     box-shadow: 0 0 10px #00cc00, 0 0 20px #00cc00;
 }
 
+.theme-neon .theme-toggle,
+.theme-neon .sound-btn {
+    padding: 0.25em;
+}
+
 .theme-neon .die.held {
     transform: scale(1.1);
     background-color: rgba(255, 0, 255, 0.75);
@@ -412,6 +464,8 @@ button:active {
 }
 
 .theme-retro .instructions {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.888rem;
     color: #ffd634;
     background-color: rgba(0, 0, 0, 0.5);
     padding: 5px;
@@ -443,6 +497,11 @@ button:active {
     color: #000;
     border-color: #00ff00; 
     box-shadow: 0 0 10px #00ff00, 0 0 15px #00ff00; 
+}
+
+.theme-retro .theme-toggle,
+.theme-retro .sound-btn {
+    padding: 0.25em;
 }
 
 .theme-retro .die.held {
